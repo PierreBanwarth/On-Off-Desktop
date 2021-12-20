@@ -8,4 +8,4 @@ LED = 26 #Définit le numéro du port GPIO qui alimente la led
 GPIO.setup(LED, GPIO.OUT) #Active le contrôle du GPIO
 
 state = GPIO.input(LED) #Lit l'état actuel du GPIO, vrai si allumé, faux si éteint
-System.println(state)
+print(state)
