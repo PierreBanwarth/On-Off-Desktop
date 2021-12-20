@@ -12,15 +12,11 @@ while True: # Run forever
 
 
     if GPIO.input(26) == GPIO.HIGH:
-        sock = socket.socket(socket.AF_INET, # Internet
-                     socket.SOCK_DGRAM) # UDP
-        sock.sendto(MESSAGE2_B, (UDP_IP, UDP_PORT)) #
+        print("high")
 
         time.sleep(0.5)
 
     else:
-        sock = socket.socket(socket.AF_INET, # Internet
-                     socket.SOCK_DGRAM) # UDP
-        sock.sendto(MESSAGE1_B, (UDP_IP, UDP_PORT)) #
+        print("low")
 
         time.sleep(0.5)
