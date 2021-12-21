@@ -5,33 +5,12 @@ import requests
 from wakeonlan import send_magic_packet
 from octorest import OctoRest
 
-
-macAdressTest = 'ff.ff.ff.ff.ff.ff'
-GPIO.setwarnings(False) # Ignore warning for now
-GPIO.setmode(GPIO.BCM) # Use physical pin numbering
-PIN = 26;
-GPIO.setup(PIN, GPIO.IN, pull_up_down=GPIO.PUD_DOWN) # Set pin 26 to be an input pin and set initial value to be pulled low (off)
-
-
-while True: # Run forever
-
-
-    if GPIO.input(PIN) == GPIO.HIGH:
-        print("high")
-
-        time.sleep(0.5)
-
-    else:
-        print("low")
-
-        time.sleep(0.5)
-
-
 # https://pypi.org/project/tinytuya/
 # pip install tinytuya
 # Online management of on/off switchs for 3D printer and Light (futur for screens too)
 
 
+macAdressTest = 'ff.ff.ff.ff.ff.ff'
 
 
 
@@ -57,3 +36,12 @@ def get_printer_info():
         return message
     except Exception as e:
         print(e)
+
+GPIO.setwarnings(False) # Ignore warning for now
+GPIO.setmode(GPIO.BCM) # Use physical pin numbering
+PIN = 26;
+GPIO.setup(PIN, GPIO.IN, pull_up_down=GPIO.PUD_UP) # Set pin 26 to be an input pin and set initial value to be pulled low (off)
+
+
+while True: # Run forever
+    print(GPIO.input(PIN))
