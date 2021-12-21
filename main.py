@@ -12,14 +12,14 @@ import tinytuya
 # Online management of on/off switchs for 3D printer and Light (futur for screens too)
 
 # a dictionary
-macAdressTest = 'ff.ff.ff.ff.ff.ff'
+macAdressTest = '1C:6F:65:D1:EA:27'
 
 # shutdown computer ok
 def shutdownComputer():
     response = requests.get("http://192.168.1.108:5001/popote/")
     print(response)
 
-def wakeOnLanComputer(macAdress):
+def wakeOnLanComputer():
     send_magic_packet(macAdress)
 
 # pip install octorest
@@ -61,9 +61,12 @@ def main():
                 if value == 1:
                     print('off')
                     light.set_status(False, switch=1)
+                    shutdownComputer()
                 else:
                     print('on')
                     light.set_status(True, switch=1)
+                    wakeOnLanComputer()
+
                 initValue = value
 
 if __name__ == '__main__':
