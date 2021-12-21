@@ -2,6 +2,7 @@
 import RPi.GPIO as GPIO # Import Raspberry Pi GPIO library
 import time
 import requests
+import json
 from wakeonlan import send_magic_packet
 from octorest import OctoRest
 
@@ -9,7 +10,7 @@ from octorest import OctoRest
 # pip install tinytuya
 # Online management of on/off switchs for 3D printer and Light (futur for screens too)
 
-
+# a dictionary
 macAdressTest = 'ff.ff.ff.ff.ff.ff'
 
 
@@ -53,6 +54,9 @@ def main():
     # get init value
     initValue = GPIO.input(PIN)
 
+    with open('conf.json') as json_file:
+        data = json.load(json_file)
+    print(data['octopiApiKey'])
     while True: # Run forever
         value = GPIO.input(PIN)
         if value != initValue:
