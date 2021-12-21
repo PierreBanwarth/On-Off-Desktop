@@ -24,7 +24,7 @@ def wakeOnLanComputer(macAdress):
     send_magic_packet(macAdress)
 
 # pip install octorest
-def get_printer_info():
+def get_printer_info(octopiApiKey):
     try:
         client = OctoRest(url="http://octopi.local", apikey="YouShallNotPass")
         message = ""
@@ -60,6 +60,7 @@ def main():
     while True: # Run forever
         value = GPIO.input(PIN)
         if value != initValue:
+            get_printer_info(octopiApiKey)
             if value == 1:
                 print('on')
             else:
