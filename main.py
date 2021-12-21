@@ -22,14 +22,18 @@ def wakeOnLanComputer(macAdress):
     send_magic_packet(macAdress)
 
 # pip install octorest
-def is_printing(octopiApiKey):
+def get_printer_info(octopiApiKey):
     try:
         client = OctoRest(url="http://octopi.local", apikey=octopiApiKey)
         message = ""
         message += str(client.version) + "\n"
         message += str(client.job_info()) + "\n"
-        return client.printer()['state']['flags']['printing']
-
+        printing = client.printer()['state']['flags']['printing']
+        if printing:
+            message += "Currently printing!\n"
+        else:
+            message += "Not currently printing...\n"
+        return message
     except Exception as e:
         print(e)
 
@@ -53,11 +57,11 @@ def main():
         while True: # Run forever
             value = GPIO.input(PIN)
             if value != initValue:
-                isPrinting = get_printer_info(data['octopiApiKey'])
+                print(get_printer_info(data['octopiApiKey']))
                 if value == 1:
-                    print('off : ' + isPrinting)
+                    print('off')
                 else:
-                    print('on : ' + isPrinting)
+                    print('off')
                 initValue = value
 
 if __name__ == '__main__':
