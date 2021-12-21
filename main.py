@@ -38,6 +38,8 @@ def get_printer_info_test(octopiApiKey):
 def main():
     light = tinytuya.OutletDevice('bf613851c9c697820fgwqt', '192.168.1.89', '3b41fcf6ca71d0ae')
     light.set_version(3.3)
+    data = light.status()
+    print('set_status() result %r' % data)
 
     GPIO.setwarnings(False) # Ignore warning for now
     GPIO.setmode(GPIO.BCM) # Use physical pin numbering
