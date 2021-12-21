@@ -13,8 +13,6 @@ from octorest import OctoRest
 # a dictionary
 macAdressTest = 'ff.ff.ff.ff.ff.ff'
 
-
-
 # shutdown computer ok
 def shutdownComputer():
     response = requests.get("http://192.168.1.108:5001/popote/")
@@ -24,18 +22,11 @@ def wakeOnLanComputer(macAdress):
     send_magic_packet(macAdress)
 
 # pip install octorest
-def get_printer_info(octopiApiKey):
+def is_printing(octopiApiKey):
     try:
         client = OctoRest(url="http://octopi.local", apikey=octopiApiKey)
-        message = ""
-        message += str(client.version) + "\n"
-        message += str(client.job_info()) + "\n"
-        printing = client.printer()['state']['flags']['printing']
-        if printing:
-            message += "Currently printing!\n"
-        else:
-            message += "Not currently printing...\n"
-        return message
+        return client.printer()['state']['flags']['printing']
+
     except Exception as e:
         print(e)
 
@@ -59,11 +50,11 @@ def main():
         while True: # Run forever
             value = GPIO.input(PIN)
             if value != initValue:
-                print(get_printer_info(data['octopiApiKey']))
+                isPrinting = get_printer_info(data['octopiApiKey'])
                 if value == 1:
-                    print('on')
+                    print('Off => printing = '+isPrinting )
                 else:
-                    print('off')
+                    print('On => printing = '+isPrinting )
                 initValue = value
 
 if __name__ == '__main__':
