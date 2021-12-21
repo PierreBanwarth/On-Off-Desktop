@@ -16,7 +16,7 @@ macAdressTest = 'ff.ff.ff.ff.ff.ff'
 
 # shutdown computer ok
 def shutdownComputer():
-    response = requests.get("http://remote-host-name:5001/secret/")
+    response = requests.get("http://remote-host-name:5001/test/")
 
 def wakeOnLanComputer(macAdress):
     send_magic_packet(macAdress)
@@ -39,9 +39,11 @@ def get_printer_info():
 
 GPIO.setwarnings(False) # Ignore warning for now
 GPIO.setmode(GPIO.BCM) # Use physical pin numbering
-PIN = 26;
+PIN = 26
 GPIO.setup(PIN, GPIO.IN, pull_up_down=GPIO.PUD_UP) # Set pin 26 to be an input pin and set initial value to be pulled low (off)
 
 
 while True: # Run forever
-    print(GPIO.input(PIN))
+    value = GPIO.input(PIN)
+    if value == 1
+        shutdownComputer()
