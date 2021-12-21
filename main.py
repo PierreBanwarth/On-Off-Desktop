@@ -60,10 +60,10 @@ def main():
                     print('''Turn off 3D print ''')
                 if value == 1:
                     print('off')
-                    light.set_status(off, switch=1)
+                    light.set_status(False, switch=1)
                 else:
                     print('on')
-                    light.set_status(on, switch=1)
+                    light.set_status(True, switch=1)
                 initValue = value
 
 if __name__ == '__main__':
