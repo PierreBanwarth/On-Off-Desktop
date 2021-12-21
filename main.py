@@ -16,7 +16,7 @@ macAdressTest = 'ff.ff.ff.ff.ff.ff'
 
 # shutdown computer ok
 def shutdownComputer():
-    response = requests.get("http://remote-host-name:5001/popote")
+    response = requests.get("http://192.168.1.108:5001/popote")
 
 def wakeOnLanComputer(macAdress):
     send_magic_packet(macAdress)
