@@ -38,8 +38,13 @@ def get_printer_info(octopiApiKey):
         print(e)
 
 
-
-
+def get_printer_info_test(octopiApiKey):
+    try:
+        client = OctoRest(url="http://octopi.local", apikey=octopiApiKey)
+        printing = client.printer()['state']['flags']['printing']
+        print(printing)
+    except Exception as e:
+        print(e)
 
 
 
@@ -58,6 +63,8 @@ def main():
             value = GPIO.input(PIN)
             if value != initValue:
                 print(get_printer_info(data['octopiApiKey']))
+                get_printer_info_test(data['octopiApiKey'])
+
                 if value == 1:
                     print('off')
                 else:
