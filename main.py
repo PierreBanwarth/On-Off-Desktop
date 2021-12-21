@@ -8,15 +8,15 @@ from octorest import OctoRest
 
 macAdressTest = 'ff.ff.ff.ff.ff.ff'
 GPIO.setwarnings(False) # Ignore warning for now
-GPIO.setmode(GPIO.BOARD) # Use physical pin numbering
-
-GPIO.setup(26, GPIO.IN, pull_up_down=GPIO.PUD_DOWN) # Set pin 26 to be an input pin and set initial value to be pulled low (off)
+GPIO.setmode(GPIO.BCM) # Use physical pin numbering
+PIN = 26;
+GPIO.setup(PIN, GPIO.IN, pull_up_down=GPIO.PUD_DOWN) # Set pin 26 to be an input pin and set initial value to be pulled low (off)
 
 
 while True: # Run forever
 
 
-    if GPIO.input(26) == GPIO.HIGH:
+    if GPIO.input(PIN) == GPIO.HIGH:
         print("high")
 
         time.sleep(0.5)
