@@ -56,16 +56,15 @@ def main():
 
     with open('conf.json') as json_file:
         data = json.load(json_file)
-    print(data['octopiApiKey'])
-    while True: # Run forever
-        value = GPIO.input(PIN)
-        if value != initValue:
-            get_printer_info(octopiApiKey)
-            if value == 1:
-                print('on')
-            else:
-                print('off')
-            initValue = value
+        while True: # Run forever
+            value = GPIO.input(PIN)
+            if value != initValue:
+                get_printer_info(data['octopiApiKey'])
+                if value == 1:
+                    print('on')
+                else:
+                    print('off')
+                initValue = value
 
 if __name__ == '__main__':
     main()
