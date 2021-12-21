@@ -38,15 +38,29 @@ def get_printer_info():
     except Exception as e:
         print(e)
 
-GPIO.setwarnings(False) # Ignore warning for now
-GPIO.setmode(GPIO.BCM) # Use physical pin numbering
-PIN = 26
-GPIO.setup(PIN, GPIO.IN, pull_up_down=GPIO.PUD_UP) # Set pin 26 to be an input pin and set initial value to be pulled low (off)
 
-shutdown = False
-while True: # Run forever
-    value = GPIO.input(PIN)
 
-    if value == 1 and not shutdown:
-        shutdownComputer()
-        shutdown = True
+
+
+
+
+def main():
+
+    GPIO.setwarnings(False) # Ignore warning for now
+    GPIO.setmode(GPIO.BCM) # Use physical pin numbering
+    PIN = 26
+    GPIO.setup(PIN, GPIO.IN, pull_up_down=GPIO.PUD_UP) # Set pin 26 to be an input pin and set initial value to be pulled low (off)
+    # get init value
+    initValue = GPIO.input(PIN)
+
+    while True: # Run forever
+        value = GPIO.input(PIN)
+        if value != initValue:
+            if value == 1:
+                print('on')
+            else:
+                print('off')
+            initValue = value
+
+if __name__ == '__main__':
+    main()
