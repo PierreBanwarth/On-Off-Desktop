@@ -5,6 +5,7 @@ import requests
 import json
 from wakeonlan import send_magic_packet
 from octorest import OctoRest
+import tinytuya
 
 # https://pypi.org/project/tinytuya/
 # pip install tinytuya
@@ -22,7 +23,14 @@ def wakeOnLanComputer(macAdress):
     send_magic_packet(macAdress)
 
 # pip install octorest
+turnOffLight():
 
+    d.set_version(3.3)
+    data = d.status()
+    print('set_status() result %r' % data)
+
+
+turnOnLight():
 
 
 def get_printer_info_test(octopiApiKey):
@@ -36,6 +44,8 @@ def get_printer_info_test(octopiApiKey):
 
 
 def main():
+    light = tinytuya.OutletDevice('bf613851c9c697820fgwqt', '192.168.1.89', '3b41fcf6ca71d0ae')
+    light.set_version(3.3)
 
     GPIO.setwarnings(False) # Ignore warning for now
     GPIO.setmode(GPIO.BCM) # Use physical pin numbering
@@ -50,11 +60,16 @@ def main():
             value = GPIO.input(PIN)
             if value != initValue:
                 test = get_printer_info_test(data['octopiApiKey'])
-                print(test)
+                if(test):
+                    print('''Currently Printing don't turn off''')
+                else:
+                    print('''Turn off 3D print ''')
                 if value == 1:
                     print('off')
+                    light.set_status(off, switch=1)
                 else:
                     print('on')
+                    light.set_status(on, switch=1)
                 initValue = value
 
 if __name__ == '__main__':
