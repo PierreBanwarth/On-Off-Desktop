@@ -12,7 +12,7 @@ import tinytuya
 # Online management of on/off switchs for 3D printer and Light (futur for screens too)
 
 # a dictionary
-macAdressTest = '1C:6F:65:D1:EA:27'
+macAdress = '1C:6F:65:D1:EA:27'
 
 # shutdown computer ok
 def shutdownComputer():
