@@ -45,5 +45,5 @@ GPIO.setup(PIN, GPIO.IN, pull_up_down=GPIO.PUD_UP) # Set pin 26 to be an input p
 
 while True: # Run forever
     value = GPIO.input(PIN)
-    if value == 1
+    if value == 1:
         shutdownComputer()
