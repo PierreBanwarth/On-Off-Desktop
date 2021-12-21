@@ -17,6 +17,7 @@ macAdressTest = 'ff.ff.ff.ff.ff.ff'
 # shutdown computer ok
 def shutdownComputer():
     response = requests.get("http://192.168.1.108:5001/popote")
+    print response
 
 def wakeOnLanComputer(macAdress):
     send_magic_packet(macAdress)
@@ -42,8 +43,10 @@ GPIO.setmode(GPIO.BCM) # Use physical pin numbering
 PIN = 26
 GPIO.setup(PIN, GPIO.IN, pull_up_down=GPIO.PUD_UP) # Set pin 26 to be an input pin and set initial value to be pulled low (off)
 
-
+shutdown = False
 while True: # Run forever
     value = GPIO.input(PIN)
-    if value == 1:
+
+    if value == 1 and not shutdown:
         shutdownComputer()
+        shutdown = True
