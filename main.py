@@ -23,14 +23,6 @@ def wakeOnLanComputer(macAdress):
     send_magic_packet(macAdress)
 
 # pip install octorest
-turnOffLight():
-
-    d.set_version(3.3)
-    data = d.status()
-    print('set_status() result %r' % data)
-
-
-turnOnLight():
 
 
 def get_printer_info_test(octopiApiKey):
