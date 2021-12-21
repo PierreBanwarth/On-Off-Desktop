@@ -25,6 +25,9 @@ def wakeOnLanComputer(macAdress):
 def is_printing(octopiApiKey):
     try:
         client = OctoRest(url="http://octopi.local", apikey=octopiApiKey)
+        message = ""
+        message += str(client.version) + "\n"
+        message += str(client.job_info()) + "\n"
         return client.printer()['state']['flags']['printing']
 
     except Exception as e:
@@ -52,9 +55,9 @@ def main():
             if value != initValue:
                 isPrinting = get_printer_info(data['octopiApiKey'])
                 if value == 1:
-                    print('Off => printing = '+isPrinting )
+                    print('off : ' + isPrinting)
                 else:
-                    print('On => printing = '+isPrinting )
+                    print('on : ' + isPrinting)
                 initValue = value
 
 if __name__ == '__main__':
