@@ -26,7 +26,7 @@ def wakeOnLanComputer(macAdress):
 # pip install octorest
 def get_printer_info(octopiApiKey):
     try:
-        client = OctoRest(url="http://octopi.local", apikey="YouShallNotPass")
+        client = OctoRest(url="http://octopi.local", apikey=octopiApiKey)
         message = ""
         message += str(client.version) + "\n"
         message += str(client.job_info()) + "\n"
