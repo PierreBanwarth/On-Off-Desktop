@@ -16,8 +16,9 @@ macAdress = '1C:6F:65:D1:EA:27'
 
 # shutdown computer ok
 def shutdownComputer():
-    response = requests.get("http://192.168.1.108:5001/popote/")
-    print(response)
+    try:
+        response = requests.get("http://192.168.1.108:5001/popote/")
+        print(response)
 
 def wakeOnLanComputer():
     send_magic_packet(macAdress)
@@ -28,11 +29,12 @@ def wakeOnLanComputer():
 def get_printer_info_test(octopiApiKey):
     try:
         client = OctoRest(url="http://octopi.local", apikey=octopiApiKey)
+        client.connect()
         printing = client.printer()['state']['flags']['printing']
         return printing
     except Exception as e:
         print(e)
-
+def
 
 
 def main():
