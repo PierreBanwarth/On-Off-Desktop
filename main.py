@@ -35,7 +35,7 @@ def get_printer_info_test(octopiApiKey):
         return printing
     except Exception as e:
         print(e)
-def
+
 
 
 def main():
