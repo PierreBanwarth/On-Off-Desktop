@@ -68,7 +68,7 @@ def main():
             print(e)
         while True: # Run forever
             value = GPIO.input(PIN)
-            if value != initValue
+            if value != initValue:
                 if value == 1:
                     print('Off')
                     light.set_status(False, switch=1)
