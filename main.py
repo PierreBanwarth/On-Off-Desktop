@@ -19,7 +19,8 @@ def shutdownComputer():
     try:
         response = requests.get("http://192.168.1.108:5001/popote/")
         print(response)
-
+    except:
+        pass
 def wakeOnLanComputer():
     send_magic_packet(macAdress)
 
