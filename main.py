@@ -73,7 +73,7 @@ def main():
                             if not get_printer_info_test(client):
                                 printer.set_status(False, switch=1)
                         except Exception as e:
-                            print e
+                            print(e)
                     else:
                         light.set_status(True, switch=1)
                         printer.set_status(True, switch=1)
