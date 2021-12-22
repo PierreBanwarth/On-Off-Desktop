@@ -15,20 +15,16 @@ import tinytuya
 pathToFile = '/home/pi/On-Off-Desktop/'
 # shutdown computer ok
 def shutdownComputer(ip, port, secret):
-    print('shutdown computer')
     try:
         response = requests.get("http://"+ip+":"+port+"/"+secret+"/")
-        print(response)
     except:
         pass
 def wakeOnLanComputer(macAdress):
-    print('wake on lan')
     send_magic_packet(macAdress)
 
 # pip install octorest
 def get_printer_info_test(client):
     printing = client.printer()['state']['flags']['printing']
-    print(client.printer())
     return printing
 
 
@@ -68,7 +64,6 @@ def main():
                 value = GPIO.input(PIN)
                 if value != initValue:
                     if value == 1:
-                        print('Off')
                         light.set_status(False, switch=1)
                         shutdownComputer(computer['ip'], computer['port'], computer['secret'])
                         try:
@@ -76,17 +71,13 @@ def main():
                             client.connect()
 
                             if not get_printer_info_test(client):
-                                print('''On eteind l'imprimante''')
                                 printer.set_status(False, switch=1)
                         except Exception as e:
-                            print(e)
+                            print e
                     else:
-                        print('On')
-                        print('light and printer on')
                         light.set_status(True, switch=1)
                         printer.set_status(True, switch=1)
                         wakeOnLanComputer(computer['mac'])
-                        print('connect printer to octoprint')
                         client.connect()
 
                     initValue = value
