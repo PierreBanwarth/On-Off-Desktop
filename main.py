@@ -27,18 +27,16 @@ def wakeOnLanComputer():
 # pip install octorest
 
 
-def get_printer_info_test(octopiApiKey):
-    try:
-        client = OctoRest(url="http://octopi.local", apikey=octopiApiKey)
-        client.connect()
+def get_printer_info_test(client):
         printing = client.printer()['state']['flags']['printing']
         return printing
-    except Exception as e:
-        print(e)
 
 
 
 def main():
+
+
+
     with open('devices.json') as deviceFile:
         tuyaDevices = json.load(deviceFile)
 
@@ -60,6 +58,11 @@ def main():
 
     with open('conf.json') as json_file:
         data = json.load(json_file)
+        try:
+            client = OctoRest(url="http://octopi.local", apikey=data['octopiApiKey'])
+            client.connect()
+        except Exception as e:
+            print(e)
         while True: # Run forever
             value = GPIO.input(PIN)
             if value != initValue:
@@ -75,6 +78,8 @@ def main():
                     print('on')
                     light.set_status(True, switch=1)
                     printer.set_status(True, switch=1)
+                    time.sleep(15)
+                    client.connect()
                     wakeOnLanComputer()
 
                 initValue = value
