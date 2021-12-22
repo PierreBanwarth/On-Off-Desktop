@@ -37,7 +37,7 @@ def get_printer_info_test(octopiApiKey):
 
 def main():
     with open('devices.json') as deviceFile:
-        deviceFile = json.load(json_file)
+        tuyaDevices = json.load(deviceFile)
 
         lightDevice = tuyaDevices[0]
         light = tinytuya.OutletDevice(lightDevice['id'], '192.168.1.89', lightDevice['key'])
