@@ -71,7 +71,7 @@ def main():
                     if value == 1:
                         print('Off')
                         light.set_status(False, switch=1)
-                        shutdownComputer(computer['ip'], computer['port'], computer['secret']):
+                        shutdownComputer(computer['ip'], computer['port'], computer['secret'])
                         if not get_printer_info_test(client):
                             print('''On eteind l'imprimante''')
                             printer.set_status(False, switch=1)
