@@ -48,7 +48,7 @@ def main():
         light.set_version(3.3)
 
         printerDevice = tuyaDevices[2]
-        printer = tinytuya.OutletDevice(printerDevice['id'], '192.168.1.89', printerDevice['key'])
+        printer = tinytuya.OutletDevice(printerDevice['id'], '192.168.1.123', printerDevice['key'])
         printer.set_version(3.3)
 
 
