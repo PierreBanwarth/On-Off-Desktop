@@ -12,8 +12,7 @@ import tinytuya
 # Online management of on/off switchs for 3D printer and Light (futur for screens too)
 
 # a dictionary
-macAdress = '1C:6F:65:D1:EA:27'
-
+pathToFile = '/home/pi/On-Off-Desktop/'
 # shutdown computer ok
 def shutdownComputer(ip, port, secret):
     print('shutdown computer')
@@ -38,7 +37,7 @@ def main():
 
 
 
-    with open('devices.json') as deviceFile:
+    with open(pathToFile+'devices.json') as deviceFile:
         tuyaDevices = json.load(deviceFile)
 
         lightDevice = tuyaDevices[0]
@@ -58,7 +57,7 @@ def main():
         # get init value
         initValue = GPIO.input(PIN)
 
-        with open('conf.json') as json_file:
+        with open(pathToFile+'conf.json') as json_file:
             data = json.load(json_file)
             try:
                 client = OctoRest(url="http://octopi.local", apikey=data['octopiApiKey'])
