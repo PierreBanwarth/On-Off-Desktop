@@ -16,20 +16,23 @@ macAdress = '1C:6F:65:D1:EA:27'
 
 # shutdown computer ok
 def shutdownComputer():
+    print('shutdown computer')
     try:
         response = requests.get("http://192.168.1.108:5001/popote/")
         print(response)
     except:
         pass
 def wakeOnLanComputer():
+    print('wake on lan')
     send_magic_packet(macAdress)
 
 # pip install octorest
 
 
 def get_printer_info_test(client):
-        printing = client.printer()['state']['flags']['printing']
-        return printing
+    printing = client.printer()['state']['flags']['printing']
+    print(client.printer())
+    return printing
 
 
 
@@ -66,21 +69,22 @@ def main():
         while True: # Run forever
             value = GPIO.input(PIN)
             if value != initValue:
-                testPrinter = get_printer_info_test(client)
+                testPrinter =
 
                 if value == 1:
-                    print('off')
+                    print('Off')
                     light.set_status(False, switch=1)
-                    shutdownComputer()
-                    if not testPrinter:
+                    if not get_printer_info_test(client):
+                        print('''On eteind l'imprimante''')
                         printer.set_status(False, switch=1)
                 else:
-                    print('on')
+                    print('On')
+                    print('light and printer on')
                     light.set_status(True, switch=1)
                     printer.set_status(True, switch=1)
-                    time.sleep(15)
-                    client.connect()
                     wakeOnLanComputer()
+                    print('connect printer to octoprint')
+                    client.connect()
 
                 initValue = value
 
