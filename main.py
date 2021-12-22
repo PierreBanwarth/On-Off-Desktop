@@ -66,7 +66,7 @@ def main():
         while True: # Run forever
             value = GPIO.input(PIN)
             if value != initValue:
-                testPrinter = get_printer_info_test(data['octopiApiKey'])
+                testPrinter = get_printer_info_test(client)
 
                 if value == 1:
                     print('off')
