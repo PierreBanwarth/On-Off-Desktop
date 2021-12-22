@@ -36,10 +36,17 @@ def get_printer_info_test(octopiApiKey):
 
 
 def main():
-    light = tinytuya.OutletDevice('bf613851c9c697820fgwqt', '192.168.1.89', '3b41fcf6ca71d0ae')
-    light.set_version(3.3)
-    data = light.status()
-    print('set_status() result %r' % data)
+    with open('devices.json') as json_file:
+        tuyaDevices = json.load(json_file)
+
+        lightDevice = tuyaDevices[0]
+        light = tinytuya.OutletDevice(lightDevice['id'], '192.168.1.89', lightDevice['key'])
+        light.set_version(3.3)
+
+        printerDevice = tuyaDevices[2]
+        printer = tinytuya.OutletDevice(printerDevice['id'], '192.168.1.89', printerDevice['key'])
+        printer.set_version(3.3)
+
 
     GPIO.setwarnings(False) # Ignore warning for now
     GPIO.setmode(GPIO.BCM) # Use physical pin numbering
@@ -53,18 +60,18 @@ def main():
         while True: # Run forever
             value = GPIO.input(PIN)
             if value != initValue:
-                test = get_printer_info_test(data['octopiApiKey'])
-                if(test):
-                    print('''Currently Printing don't turn off''')
-                else:
-                    print('''Turn off 3D print ''')
+                testPrinter = get_printer_info_test(data['octopiApiKey'])
+                
                 if value == 1:
                     print('off')
                     light.set_status(False, switch=1)
                     shutdownComputer()
+                    if not testPrinter:
+                        printer.set_status(False, switch=1)
                 else:
                     print('on')
                     light.set_status(True, switch=1)
+                    printer.set_status(True, switch=1)
                     wakeOnLanComputer()
 
                 initValue = value
