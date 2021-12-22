@@ -71,9 +71,15 @@ def main():
                         print('Off')
                         light.set_status(False, switch=1)
                         shutdownComputer(computer['ip'], computer['port'], computer['secret'])
-                        if not get_printer_info_test(client):
-                            print('''On eteind l'imprimante''')
-                            printer.set_status(False, switch=1)
+                        try:
+                            client = OctoRest(url="http://octopi.local", apikey=data['octopiApiKey'])
+                            client.connect()
+
+                            if not get_printer_info_test(client):
+                                print('''On eteind l'imprimante''')
+                                printer.set_status(False, switch=1)
+                        except Exception as e:
+                            print(e)
                     else:
                         print('On')
                         print('light and printer on')
