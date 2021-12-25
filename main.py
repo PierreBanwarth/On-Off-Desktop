@@ -65,7 +65,7 @@ def main():
                 if value != initValue:
                     if value == 1:
                         light.set_status(False, switch=1)
-                        shutdownComputer(computer['ip'], computer['port'], computer['secret'])
+                        #shutdownComputer(computer['ip'], computer['port'], computer['secret'])
                         try:
                             client = OctoRest(url="http://octopi.local", apikey=data['octopiApiKey'])
                             client.connect()
