@@ -40,11 +40,11 @@ def main():
         light = tinytuya.OutletDevice(lightDevice['id'], lightDevice['ip'], lightDevice['key'])
         light.set_version(3.3)
 
-        printerDevice = tuyaDevices[2]
+        printerDevice = tuyaDevices[1]
         printer = tinytuya.OutletDevice(printerDevice['id'], printerDevice['ip'], printerDevice['key'])
         printer.set_version(3.3)
 
-        computer = tuyaDevices[3]
+        computer = tuyaDevices[2]
 
         GPIO.setwarnings(False) # Ignore warning for now
         GPIO.setmode(GPIO.BCM) # Use physical pin numbering
